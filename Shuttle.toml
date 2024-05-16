@@ -1,1 +1,1 @@
-assets = ["templates/*", "data/*"]
+assets = ["templates/*", "data/*", "static/*"]

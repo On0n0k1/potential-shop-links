@@ -5,10 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    {#
+    <script src="/static/bundle.js" defer></script> #}
+    {#
+    <script src="/static/bundle.js" type="module"></script> #}
 </head>
 
 <body>
-    testing
+    <input type="text">
+
+    <script>
+        //        const fileUrl = '/static/bundle.js';
+        //
+        //        fetch(fileUrl)
+        //            .then(response => {
+        //                if (!response.ok) {
+        //                    throw new Error('Network response was not ok');
+        //                }
+        //                return response.text();
+        //            })
+        //            .then(data => {
+        //                console.log('File contents:', data);
+        //            })
+        //            .catch(error => {
+        //                console.error('There was a problem fetching the file:', error);
+        //            });
+    </script>
+    <script src="/static/bundle.js"></script>
+
+    <script>
+        const { add, multiply, subtract } = window.PackagedLibrary.default;
+        const result = add(5, 4);
+        console.log("Result is ", result);
+    </script>
 </body>
 
 </html>
