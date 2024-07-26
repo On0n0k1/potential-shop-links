@@ -1,24 +1,25 @@
-use sqlx::{Pool, Sqlite, SqlitePool};
+pub mod entry;
+pub mod user;
 
 use crate::error::Error;
-use std::fs::File;
+use mongodb::{options::ClientOptions, Client};
 
 pub const DBPATH: &str = "./data/users.db";
 
 pub struct Dao {
-    pool: sqlx::SqlitePool,
+    client: Client,
 }
 
 impl Dao {
-    pub async fn new() -> Result<Self, Error> {
-        File::create(DBPATH).or_else(Error::database_initialization_error)?;
-        let pool: Pool<Sqlite> = SqlitePool::connect(DBPATH)
-            .await
-            .or_else(Error::database_connection_failed)?;
-        Ok(Self { pool })
+    pub async fn new(secrets: &shuttle_runtime::SecretStore) -> Result<Self, Error> {
+        let uri = secrets.get("URI").unwrap();
+        // let uri = crate::globals::MONGODBURI;
+        let options = ClientOptions::parse(uri).await.unwrap();
+        let client = Client::with_options(options).or_else(Error::database)?;
+        Ok(Self { client })
     }
 
-    pub fn pool(&self) -> &sqlx::SqlitePool {
-        &self.pool
+    pub fn client(&self) -> &Client {
+        &self.client
     }
 }

@@ -5,38 +5,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    {#
-    <script src="/static/bundle.js" defer></script> #}
-    {#
-    <script src="/static/bundle.js" type="module"></script> #}
+    <link rel="stylesheet" href="/static/entries.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: rgb(0, 70, 66);
+        }
+
+        body {
+            min-width: 100vw;
+            min-height: 100vh;
+            box-sizing: border-box;
+            /*background-color: red;*/
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            background-image: url("../static/background.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            grid-template-columns: 1fr;
+            padding: 4rem;
+        }
+
+        div.main {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 138, 55, 0.788);
+            box-sizing: content-box;
+            border: 2px solid black;
+            border-radius: 10%;
+        }
+
+        div.urlForm {
+            /*background-color: purple;*/
+            padding: 3rem;
+            /*margin: 0 auto;*/
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px dashed black;
+        }
+
+        div.urlForm input {
+            height: auto;
+            font-size: large;
+            padding: 1rem;
+        }
+
+        div.urlForm button {
+            height: auto;
+            font-size: large;
+            padding: 1rem;
+        }
+
+        div.content {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 
 <body>
-    <input type="text">
+    <div class="main">
+        <div class="urlForm">
+            <form id="urlForm">
+                <input type="text" id="urlInput" placeholder="Enter URL">
+                <button type="submit">New Sentence</button>
+            </form>
+        </div>
 
-    <script>
-        //        const fileUrl = '/static/bundle.js';
-        //
-        //        fetch(fileUrl)
-        //            .then(response => {
-        //                if (!response.ok) {
-        //                    throw new Error('Network response was not ok');
-        //                }
-        //                return response.text();
-        //            })
-        //            .then(data => {
-        //                console.log('File contents:', data);
-        //            })
-        //            .catch(error => {
-        //                console.error('There was a problem fetching the file:', error);
-        //            });
-    </script>
+        <p>Rendered Content</p>
+        <div class="content" id="content"></div>
+    </div>
+
+
     <script src="/static/bundle.js"></script>
 
     <script>
         const { add, multiply, subtract } = window.PackagedLibrary.default;
         const result = add(5, 4);
         console.log("Result is ", result);
+
+        document.getElementById('urlForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const url = document.getElementById('urlInput').value;
+            let request = {
+                url,
+            };
+            let requestJson = JSON.stringify(request);
+            console.log("Sending: ", request);
+            try {
+                const response = await fetch('/proxy', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: requestJson
+                });
+                const html = await response.text();
+                console.log("Text: ", html);
+                const parser = new DOMParser();
+                console.log("Parser: ", parser);
+                const doc = parser.parseFromString(html, 'text/html');
+                // Modify this selector according to the structure of the webpage
+                const sentenceContent = doc.querySelector('.sentence_content'); // Example selector for extracting sentence
+                if (sentenceContent) {
+                    // console.log('Price:', sentenceContent.textContent.trim());
+                    //const content = document.getElementById("content");
+                    content.appendChild(sentenceContent);
+                } else {
+                    console.error('Price element not found');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
     </script>
 </body>
 

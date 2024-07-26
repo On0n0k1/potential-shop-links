@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@300;600&display=swap">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: rgb(0, 70, 66);
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 0.9rem;
+        }
+
+        body {
+            min-width: 100vw;
+            min-height: 100vh;
+            box-sizing: border-box;
+            /*background-color: red;*/
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            background-image: url("../static/background.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        div.login {
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            /*min-width: 400px;
+            min-height: 500px;*/
+            height: auto;
+            /*background-color: orange;*/
+            grid-template-columns: 1fr;
+            border: 2px solid rgb(255, 117, 18);
+            border-radius: 10%;
+            background-color: rgba(255, 138, 55, 0.788);
+            opacity: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        form {
+            min-width: 20rem;
+            width: auto;
+            height: auto;
+            /*background-color: red;*/
+            margin: 5rem 3rem;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        div.entry {
+            width: 100%;
+            margin: 0.3rem 0;
+            font-size: 1.2rem;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        div.entry input {
+            float: right;
+            padding: 0px 0.3rem;
+            margin-left: 0.4rem;
+        }
+
+        button.login {
+            background-color: rgb(100, 60, 0);
+            padding: 0.7rem;
+            color: white;
+            margin: 0.6rem 0.8rem;
+        }
+
+        button.login:hover {
+            opacity: 90%;
+            color: rgb(96, 255, 4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+
+        <form id="myForm">
+            <h1>Welcome</h1>
+            <div class="entry">
+                <label for="username"><b>Username: </b> </label>
+                <input type="text" id="username" />
+            </div>
+            <div class="entry">
+                <label for="password"><b>Password: </b></label>
+                <input type="password" id="password" />
+            </div>
+            <button type="submit" class="login">Enter</button>
+            <div class="entry">New here? Register</div>
+        </form>
+
+    </div>
+
+</body>
+<script>
+    window.onload = function () {
+        console.log("Page loaded");
+        let usernameEntry = document.getElementById("username");
+        let passwordEntry = document.getElementById("password");
+
+
+
+
+
+        document.getElementById("myForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            let username = usernameEntry.value;
+            let password = passwordEntry.value;
+            let url = "/user/" + username;
+            const data = {
+                password,
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(
+                data => {
+                    console.log('Success: ', data);
+                    window.location.href = '/profile/' + username;
+                }
+            ).catch((err) => {
+                console.error('Error: ', error);
+            })
+        })
+
+    }
+</script>
+
+</html>

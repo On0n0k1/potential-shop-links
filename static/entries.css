@@ -1,0 +1,338 @@
+/* Local */
+
+ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: flex-end;
+    /* Align items to the bottom */
+    justify-content: flex-start;
+    /* Optional: Align items to the start of the container */
+    height: auto;
+    /* Container height adjusts to fit content */
+}
+
+/* from website */
+
+.concept_light-sentences .sentence .japanese .section_divider {
+    margin-top: 14px;
+    line-height: 20px;
+    font-size: 12px;
+    font-family: Helvetica
+}
+
+.concept_light-sentences .sentence .japanese li {
+    font-size: 14px
+}
+
+.concept_light-sentences .sentence .japanese li .furigana {
+    height: 12px;
+    font-size: 10px
+}
+
+.concept_light-sentences .sentence .japanese .english {
+    margin: 12px 0 0 15px;
+    font-size: 14px;
+    font-family: Helvetica;
+    display: inline
+}
+
+
+.concept_light-meanings .sentences .japanese li {
+    font-size: 14px;
+    line-height: 1
+}
+
+.concept_light-meanings .sentences .japanese li .furigana {
+    font-size: 10px
+}
+
+.japanese_word__furigana_wrapper {
+    display: block;
+    min-height: 0.5em;
+    max-height: 0
+}
+
+.japanese_word__furigana {
+    display: inline-block;
+    text-align: center;
+    line-height: 1.15;
+    font-size: 50%;
+    position: relative;
+    top: -1.2em
+}
+
+.japanese_word__furigana::before {
+    content: attr(data-text);
+    font-size: 200%;
+    white-space: nowrap;
+    display: block;
+    text-align: left;
+    visibility: hidden;
+    height: 0
+}
+
+.japanese_word__furigana-invisible {
+    color: white
+}
+
+
+.sentences ul.japanese li {
+    display: inline-block;
+    font-size: 18px
+}
+
+
+
+.sentences .japanese .furigana {
+    display: block;
+    font-size: 12px;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+
+.japanese_gothic {
+    font-family: "Source Han Sans", "源ノ角ゴシック", "Hiragino Sans", "HiraKakuProN-W3", "Hiragino Kaku Gothic ProN W3", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Noto Sans", "Noto Sans CJK JP", "メイリオ", Meiryo, "游ゴシック", YuGothic, "ＭＳ Ｐゴシック", "MS PGothic", "ＭＳ ゴシック", "MS Gothic", sans-serif
+}
+
+.japanese_mincho {
+    font-family: "HiraMinProN-W3", "Hiragino Mincho ProN W3", "Hiragino Mincho ProN", "ヒラギノ明朝 ProN W3", "游明朝", YuMincho, "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", "MS Mincho", serif
+}
+
+
+
+
+/* English */
+
+
+.concept_light-sentences .sentence .japanese .english {
+    margin: 12px 0 0 15px;
+    font-size: 14px;
+    font-family: Helvetica;
+    display: inline
+}
+
+
+.concept_light-meanings .sentences .english {
+    font-family: "Helvetica Neue", Helvetica, Arial
+}
+
+
+.sentences .english {
+    margin: 0;
+    font-size: 18px
+}
+
+.word .sense .english {
+    float: left
+}
+
+/* clearfix */
+
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table
+}
+
+.clearfix:after {
+    clear: both
+}
+
+/* furigana  */
+
+
+.collocations .collocation .furigana {
+    font-size: 11px;
+    line-height: 1
+}
+
+.concept_light-sentences .sentence .japanese li .furigana {
+    height: 12px;
+    font-size: 10px
+}
+
+
+
+.concept_light-meanings .sentences .japanese li .furigana {
+    font-size: 10px
+}
+
+
+.japanese_word__furigana_wrapper {
+    display: block;
+    min-height: 0.5em;
+    max-height: 0
+}
+
+.japanese_word__furigana {
+    display: inline-block;
+    text-align: center;
+    line-height: 1.15;
+    font-size: 50%;
+    position: relative;
+    top: -1.2em
+}
+
+.japanese_word__furigana::before {
+    content: attr(data-text);
+    font-size: 200%;
+    white-space: nowrap;
+    display: block;
+    text-align: left;
+    visibility: hidden;
+    height: 0
+}
+
+.japanese_word__furigana-invisible {
+    color: white
+}
+
+
+#zen_bar .furigana {
+    display: block;
+    font-size: 0.55em;
+    color: #000;
+    margin-right: 2px;
+    height: 1em;
+    padding-left: 4px
+}
+
+#zen_bar .furigana_offset_1 {
+    margin-left: 1.8em
+}
+
+#zen_bar .furigana_offset_2 {
+    margin-left: 3.6em
+}
+
+#zen_bar .furigana_offset_3 {
+    margin-left: 5.4em
+}
+
+#zen_bar .furigana_offset_4 {
+    margin-left: 7.2em
+}
+
+#zen_bar .furigana_offset_5 {
+    margin-left: 9em
+}
+
+#zen_bar .furigana_offset_6 {
+    margin-left: 10.8em
+}
+
+#zen_bar .furigana_offset_7 {
+    margin-left: 12.6em
+}
+
+#zen_bar .furigana_offset_8 {
+    margin-left: 14.4em
+}
+
+#zen_bar .furigana_offset_9 {
+    margin-left: 16.2em
+}
+
+#zen_bar .furigana_offset_10 {
+    margin-left: 18em
+}
+
+#zen_bar .furigana_offset_11 {
+    margin-left: 19.8em
+}
+
+#zen_bar .furigana_offset_12 {
+    margin-left: 21.6em
+}
+
+#zen_bar .furigana_offset_13 {
+    margin-left: 23.4em
+}
+
+#zen_bar .furigana_offset_14 {
+    margin-left: 25.2em
+}
+
+#zen_bar .furigana_offset_15 {
+    margin-left: 27em
+}
+
+#zen_bar .furigana_offset_16 {
+    margin-left: 28.8em
+}
+
+#zen_bar .furigana_offset_17 {
+    margin-left: 30.6em
+}
+
+#zen_bar .furigana_offset_18 {
+    margin-left: 32.4em
+}
+
+#zen_bar .furigana_offset_19 {
+    margin-left: 34.2em
+}
+
+#zen_bar .furigana_offset_20 {
+    margin-left: 36em
+}
+
+.sentences .japanese .furigana {
+    display: block;
+    font-size: 12px;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none
+}
+
+.furigana.inflector-furigana {
+    font-size: 80%
+}
+
+.furigana.inflector-furigana span {
+    min-width: 0
+}
+
+.furigana {
+    display: block;
+    font-size: 45%;
+    min-height: 1.15em
+}
+
+.furigana span {
+    display: inline-block;
+    text-align: center;
+    min-width: 2em;
+    line-height: 1.15
+}
+
+.furigana .kanji {
+    min-width: 2.25em
+}
+
+.furigana .kanji-4-up,
+.furigana .kanji-5-up {
+    letter-spacing: -0.05em
+}
+
+ruby.furigana-justify rb {
+    display: block;
+    visibility: hidden;
+    overflow: hidden;
+    height: 0px;
+    font-size: 31px
+}
+
+ruby.furigana-justify rt {
+    font-size: 100%;
+    margin-top: -100px
+}

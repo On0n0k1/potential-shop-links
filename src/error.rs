@@ -2,22 +2,32 @@ use actix_web::{http::StatusCode, HttpResponse, ResponseError};
 
 #[derive(Debug)]
 pub enum Error {
-    DatabaseInitializationError(std::io::Error),
-    DatabaseConnectionFailed(sqlx::error::Error),
     TeraTemplatesParse(tera::Error),
+    Database(mongodb::error::Error),
+    UserNotFound,
+    IncorrectPassword,
+    ParsingOID(bson::oid::Error),
 }
 
 impl Error {
-    pub fn database_initialization_error<A>(err: std::io::Error) -> Result<A, Self> {
-        Err(Self::DatabaseInitializationError(err))
-    }
-
-    pub fn database_connection_failed<A>(err: sqlx::error::Error) -> Result<A, Self> {
-        Err(Self::DatabaseConnectionFailed(err))
-    }
-
     pub fn tera_templates_parse<A>(err: tera::Error) -> Result<A, Self> {
         Err(Self::TeraTemplatesParse(err))
+    }
+
+    pub fn database<A>(err: mongodb::error::Error) -> Result<A, Self> {
+        Err(Self::Database(err))
+    }
+
+    pub fn user_not_found<A>() -> Result<A, Self> {
+        Err(Self::UserNotFound)
+    }
+
+    pub fn incorrect_password<A>() -> Result<A, Self> {
+        Err(Self::IncorrectPassword)
+    }
+
+    pub fn parsing_oid<A>(err: bson::oid::Error) -> Result<A, Self> {
+        Err(Self::ParsingOID(err))
     }
 }
 
@@ -33,21 +43,24 @@ impl ResponseError for Error {
     fn status_code(&self) -> actix_web::http::StatusCode {
         #[allow(clippy::match_single_binding)]
         match &self {
+            Self::IncorrectPassword => StatusCode::FORBIDDEN,
+            Self::UserNotFound => StatusCode::NOT_FOUND,
+            Self::ParsingOID(_) => StatusCode::BAD_REQUEST,
             _ => StatusCode::INTERNAL_SERVER_ERROR,
         }
     }
 
     fn error_response(&self) -> actix_web::HttpResponse<actix_web::body::BoxBody> {
         let msg: String = match &self {
-            Self::DatabaseInitializationError(err) => {
-                format!("Failed to initialize SQlite Database: {err:?}")
-            }
-            Self::DatabaseConnectionFailed(err) => {
-                format!("Failed to connect to database: {err:?}")
-            }
             Self::TeraTemplatesParse(err) => {
                 format!("Failed to parse templates directory for tera: {err:?}")
             }
+            Self::Database(err) => {
+                format!("Database Error: {err:?}")
+            }
+            Self::UserNotFound => "Username does not exists".to_string(),
+            Self::IncorrectPassword => "Password is incorrect".to_string(),
+            Self::ParsingOID(err) => format!("Failed to parse Object Id: {err:?}"),
         };
         log::error!("{msg}");
         HttpResponse::build(self.status_code()).finish()
